@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One Question 💘</title>
+
+  <style>
+    :root{
+      --pink:#ff4d6d;
+      --rose:#d62839;
+      --bg1:#ffe3ec;
+      --bg2:#fff6f9;
+      --ink:#1f1f1f;
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0; min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--ink);
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+      display:flex; align-items:center; justify-content:center;
+      padding:18px;
+    }
+
+    .wrap{
+      width:min(760px, 96vw);
+      background:#ffffffcc;
+      border:1px solid #ffd1dc;
+      border-radius:20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.10);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    header{
+      padding:18px 18px 8px;
+      text-align:center;
+    }
+    h1{ margin:0; font-size:28px; }
+    .sub{ margin:8px 0 0; opacity:.8; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+    }
+    @media (max-width: 820px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .photos{
+      padding:14px;
+      border-top:1px solid #ffe0e8;
+      border-right:1px solid #ffe0e8;
+    }
+    @media (max-width: 820px){
+      .photos{ border-right:0; }
+    }
+
+    .frame{
+      position:relative;
+      width:100%;
+      aspect-ratio:16/11;
+      border-radius:16px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #ffd1dc;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    .frame img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:0;
+      transition:opacity .8s ease;
+    }
+    .frame img.active{ opacity:1; }
+
+    .dots{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-top:12px;
+    }
+    .dot{
+      width:9px; height:9px;
+      border-radius:50%;
+      background:#ffd1dc;
+      border:1px solid #ffb3c1;
+    }
+    .dot.on{ background:var(--pink); }
+
+    .panel{
+      padding:14px;
+      border-top:1px solid #ffe0e8;
+    }
+
+    .question{
+      text-align:center;
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .stage{
+      margin:10px auto;
+      width:90%;
+      aspect-ratio:16/10;
+      position:relative;
+      border-radius:16px;
+      border:1px dashed #ffd1dc;
+      background:#fff7fa;
+      overflow:hidden;
+    }
+
+    .hand{
+      position:absolute;
+      left:-60%;
+      bottom:10%;
+      width:56%;
+      height:34%;
+      background:#f2c6a0;
+      border-radius:40px;
+      animation:handIn 1.4s forwards;
+    }
+    .hand:before{
+      content:"";
+      position:absolute;
+      right:-12%;
+      top:18%;
+      width:26%;
+      height:56%;
+      background:#f2c6a0;
+      border-radius:30px;
+    }
+
+    .roseStem{
+      position:absolute;
+      left:-60%;
+      bottom:26%;
+      width:60%;
+      height:8px;
+      background:#2d6a4f;
+      border-radius:10px;
+      animation:handIn 1.4s forwards;
+    }
+
+    .roseBloom{
+      position:absolute;
+      left:18%;
+      bottom:31%;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #ff8fa3, var(--rose));
+      box-shadow:0 10px 18px rgba(214,40,57,.25);
+      animation:bloom 1.6s forwards;
+      opacity:0;
+    }
+
+    @keyframes handIn{
+      to{ left:6%; }
+    }
+    @keyframes bloom{
+      60%{ opacity:1; transform:scale(1.1); }
+      100%{ opacity:1; transform:scale(1); }
+    }
+
+    .btns{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:10px;
+    }
+
+    button{
+      border:0;
+      border-radius:999px;
+      padding:12px 18px;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 10px 18px rgba(0,0,0,.10);
+    }
+    .yes{ background:var(--pink); color:#fff; }
+    .no{ background:#f1f3f5; }
+
+    footer{
+      text-align:center;
+      font-size:12px;
+      opacity:.7;
+      padding:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Hey beautiful 💘</h1>
+      <div class="sub">I made this because you mean a lot to me.</div>
+    </header>
+
+    <div class="grid">
+      <section class="photos">
+        <div class="frame">
+          <img src="us1.jpg" class="active">
+          <img src="us2.jpg">
+          <img src="us3.jpg">
+        </div>
+        <div class="dots" id="dots"></div>
+      </section>
+
+      <section class="panel">
+        <div class="question">Will you be my Valentine? 🌹</div>
+
+        <div class="stage">
+          <div class="hand"></div>
+          <div class="roseStem"></div>
+          <div class="roseBloom"></div>
+        </div>
+
+        <div class="btns">
+          <button class="yes" id="yesBtn">YES 💖</button>
+          <button class="no" id="noBtn">No 🙈</button>
+        </div>
+      </section>
+    </div>
+
+    <footer>Made with love by Fateh ❤️</footer>
+  </div>
+
+  <script>
+    const phone = "+61423137666"; // 🔴 PUT YOUR PHONE NUMBER HERE
+
+    function openText(msg){
+      window.location.href =
+        `sms:${phone}?&body=${encodeURIComponent(msg)}`;
+    }
+
+    document.getElementById("yesBtn").onclick = () =>
+      openText("YES!!! 💘🌹 I’ll be your Valentine ❤️");
+
+    document.getElementById("noBtn").onclick = () =>
+      openText("No 🙈 but this is still really sweet ❤️");
+
+    const imgs = document.querySelectorAll(".frame img");
+    const dots = document.getElementById("dots");
+    let i = 0;
+
+    imgs.forEach((_, idx)=>{
+      const d=document.createElement("div");
+      d.className="dot"+(idx===0?" on":"");
+      d.onclick=()=>show(idx);
+      dots.appendChild(d);
+    });
+
+    function show(n){
+      imgs[i].classList.remove("active");
+      dots.children[i].classList.remove("on");
+      i=n;
+      imgs[i].classList.add("active");
+      dots.children[i].classList.add("on");
+    }
+
+    setInterval(()=>show((i+1)%imgs.length),2800);
+  </script>
+</body>
+</html>
+
